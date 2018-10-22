@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>Experiments</h1>
+    <ul>
+    {% for experiment in object_list %}
+        <li><a href="{% url 'experiment-detail' experiment.id %}">{{ experiment.id }}</a> {{ experiment.start_date|date }} Running: {{experiment.running}}</li>
+    {% empty %}
+        <li>No experiments yet.</li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url 'experiment-create' %}">Create new experiment</a><br>
+  </div>
+</div>
+
+{% endblock %}

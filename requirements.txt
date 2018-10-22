@@ -1,0 +1,4 @@
+django==1.11.6
+kubernetes==3.0.0
+pyyaml==3.12
+docker==2.5.1

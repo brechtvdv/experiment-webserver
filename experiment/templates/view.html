@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  Id: {{ object.id }}<br>
+  started: {{ object.start_date }}<br>
+  stopped: {{ object.end_date }}<br>
+  Parallel: {{object.parallel}}<br>
+  host network: {{object.hostnetwork}}<br>
+  Parameters: {{object.parameters}}, parsed: {{object.format_arguments}}<br>
+  environment:
+  <ul>
+    {% for key, value in object.environment.items %}
+  <li>{{key}}: {{value}}</li>
+  {% endfor %}
+  </ul>
+  Image: {{object.image}}, full url: {{object.image.full_tag_external}}
+  {% if not object.started %}
+  <form action="{% url 'experiment-start' object.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="start experiment" />
+  </form>
+  {% elif not object.stopped %}
+  <form action="{% url 'experiment-scale' object.id %}" method="post">
+    {% csrf_token %}
+    {{ scale_form }}
+    <input type="submit" value="Submit" />
+  </form>
+  <form action="{% url 'experiment-stop' object.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="stop experiment" />
+  </form>
+  <a href="http://{{request.META.SERVER_NAME}}:3000/dashboard/db/requests?orgId=1&var-experiment={{object.id}}">Grafana</a>
+  {% endif %}
+{% endblock %}

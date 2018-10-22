@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>Images</h1>
+    <ul>
+    {% for image in object_list %}
+        <li>id: {{ image.id }}, tag: {{ image.tag}}, tarfile: <a href="{{image.tarfile.url}}">Download tarfile</a>, build_started: {{image.build_started}}, build: {{image.builded}}</li>
+
+
+    {% empty %}
+        <li>No images yet.</li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url 'image-create' %}">Create new image</a>
+  </div>
+</div>
+
+{% endblock %}
