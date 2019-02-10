@@ -2,7 +2,7 @@
 This repository contains the code to setup the control website, and connect to the Docker daemon and the Kubernetes master.  
 It can be installed by running:
 ```bash
-git clone https://github.ugent.be/jlemaes/experiment-webserver.git
+git clone https://github.com/brechtvdv/experiment-webserver.git
 cd experiment-webserver
 pip install -r requirements.txt
 python manage.py migrate
